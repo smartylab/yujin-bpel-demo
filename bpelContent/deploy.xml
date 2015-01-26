@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:adapter="http://smartylab.co.kr/products/op/adapter" xmlns:kr.co.smartylab="kr.co.smartylab">
+  <process name="kr.co.smartylab:DemoBP">
+    <active>true</active>
+    <retired>false</retired>
+    <process-events generate="all"/>
+    <provide partnerLink="client">
+      <service name="kr.co.smartylab:DemoBPService" port="DemoBPPort"/>
+    </provide>
+    <invoke partnerLink="DynamicAdapter">
+      <service name="adapter:concert_adapter_soap_serverService" port="concert_adapter_soap_server"/>
+    </invoke>
+  </process>
+</deploy>

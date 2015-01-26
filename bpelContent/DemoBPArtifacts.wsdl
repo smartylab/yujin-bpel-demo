@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="kr.co.smartylab" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:wsdl="http://smartylab.co.kr/products/op/adapter" name="DemoBP" targetNamespace="kr.co.smartylab" xmlns:p="http://www.w3.org/2001/XMLSchema">
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     TYPE DEFINITION - List of types participating in this BPEL process 
+     The BPEL Designer will generate default request and response types
+     but you can define or import any XML Schema type and use them as part 
+     of the message types.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <plnk:partnerLinkType name="DynamicAdapterPLT">
+    <plnk:role name="DynamicAdapterPLTRole" portType="wsdl:concert_adapter_soap_serverPortType"/>
+  </plnk:partnerLinkType>
+    <import location="DynamicAdapter.wsdl" namespace="http://smartylab.co.kr/products/op/adapter"/>
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="kr.co.smartylab">
+
+            <element name="DemoBPRequest">
+                <complexType>
+                    <sequence>
+                        <element name="input" type="string"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="DemoBPResponse">
+                <complexType>
+                    <sequence>
+                        <element name="result" type="string"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="invoke_turtlebot_first">
+            	<complexType>
+            		<sequence>
+            			<element name="in" type="string"></element>
+            		</sequence>
+            	</complexType>
+            </element>
+            <element name="invoke_turtlebot_firstResponse">
+            	<complexType>
+            		<sequence>
+            			<element name="out" type="string"></element>
+            		</sequence>
+            	</complexType>
+            </element>
+            <element name="invoke_first_service">
+            	<complexType>
+            		<sequence>
+            			<element name="in" type="string"></element>
+            		</sequence>
+            	</complexType>
+            </element>
+            <element name="invoke_first_serviceResponse">
+            	<complexType>
+            		<sequence>
+            			<element name="out" type="string"></element>
+            		</sequence>
+            	</complexType>
+            </element>
+            <element name="invoke_second_service">
+            	<complexType>
+            		<sequence>
+            			<element name="in" type="string"></element>
+            		</sequence>
+            	</complexType>
+            </element>
+            <element name="invoke_second_serviceResponse">
+            	<complexType>
+            		<sequence>
+            			<element name="out" type="string"></element>
+            		</sequence>
+            	</complexType>
+            </element>
+            <element name="release_resources">
+            	<complexType>
+            		<sequence>
+            			<element name="in" type="string"></element>
+            		</sequence>
+            	</complexType>
+            </element>
+            <element name="release_resourcesResponse">
+            	<complexType>
+            		<sequence>
+            			<element name="out" type="string"></element>
+            		</sequence>
+            	</complexType>
+            </element>
+        </schema>
+    </types>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     MESSAGE TYPE DEFINITION - Definition of the message types used as 
+     part of the port type defintions
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <message name="DemoBPRequestMessage">
+        <part element="tns:DemoBPRequest" name="payload"/>
+    </message>
+    <message name="DemoBPResponseMessage">
+        <part element="tns:DemoBPResponse" name="payload"/>
+    </message>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     PORT TYPE DEFINITION - A port type groups a set of operations into
+     a logical service unit.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+
+    <!-- portType implemented by the DemoBP BPEL process -->
+    <message name="invoke_turtlebot_firstRequest">
+    	<part name="parameters" element="tns:invoke_turtlebot_first"></part>
+    </message>
+    <message name="invoke_turtlebot_firstResponse">
+    	<part name="parameters" element="tns:invoke_turtlebot_firstResponse"></part>
+    </message>
+    <message name="invoke_first_serviceRequest">
+    	<part name="parameters" element="tns:invoke_first_service"></part>
+    </message>
+    <message name="invoke_first_serviceResponse">
+    	<part name="parameters" element="tns:invoke_first_serviceResponse"></part>
+    </message>
+    <message name="invoke_second_serviceRequest">
+    	<part name="parameters" element="tns:invoke_second_service"></part>
+    </message>
+    <message name="invoke_second_serviceResponse">
+    	<part name="parameters" element="tns:invoke_second_serviceResponse"></part>
+    </message>
+    <message name="release_resourcesRequest">
+    	<part name="parameters" element="tns:release_resources"></part>
+    </message>
+    <message name="release_resourcesResponse">
+    	<part name="parameters" element="tns:release_resourcesResponse"></part>
+    </message>
+    <portType name="DemoBP">
+        <operation name="process">
+            <input message="tns:DemoBPRequestMessage"/>
+            <output message="tns:DemoBPResponseMessage"/>
+        </operation>
+        <operation name="invoke_first_service">
+        	<input message="tns:invoke_first_serviceRequest"></input>
+        </operation>
+        <operation name="invoke_second_service">
+        	<input message="tns:invoke_second_serviceRequest"></input>
+        </operation>
+        <operation name="release_resources">
+        	<input message="tns:release_resourcesRequest"></input>
+        </operation>
+    </portType>   
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     PARTNER LINK TYPE DEFINITION
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <plnk:partnerLinkType name="DemoBP">
+        <plnk:role name="DemoBPProvider" portType="tns:DemoBP"/>
+    </plnk:partnerLinkType>
+    
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     BINDING DEFINITION - Defines the message format and protocol details
+     for a web service.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <binding name="DemoBPBinding" type="tns:DemoBP">
+    	<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    	<operation name="process">
+    		<soap:operation soapAction="kr.co.smartylab/process"/>
+    		<input>
+    			<soap:body use="literal"/>
+    		</input>
+    		<output>
+    			<soap:body use="literal"/>
+    		</output>
+    	</operation>
+    	<operation name="invoke_first_service">
+    		<soap:operation soapAction="kr.co.smartylab/invoke_first_service"/>
+    		<input>
+    			<soap:body use="literal"/>
+    		</input>
+    		<output>
+    			<soap:body use="literal"/>
+    		</output>
+    	</operation>
+    	<operation name="invoke_second_service">
+    		<soap:operation soapAction="kr.co.smartylab/invoke_second_service"/>
+    		<input>
+    			<soap:body use="literal"/>
+    		</input>
+    		<output>
+    			<soap:body use="literal"/>
+    		</output>
+    	</operation>
+    	<operation name="release_resources">
+    		<soap:operation soapAction="kr.co.smartylab/release_resources"/>
+    		<input>
+    			<soap:body use="literal"/>
+    		</input>
+    		<output>
+    			<soap:body use="literal"/>
+    		</output>
+    	</operation>    	
+    </binding>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     SERVICE DEFINITION - A service groups a set of ports into
+     a service unit.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <service name="DemoBPService">
+    	<port binding="tns:DemoBPBinding" name="DemoBPPort">
+    		<soap:address location="http://localhost:8080/ode/processes/DemoBP"/>
+    	</port>
+    </service>
+</definitions>
