@@ -106,13 +106,13 @@
     <tns:methods>
       <tns:Method>
         <tns:name>invoke_first_service</tns:name>
-        <tns:address>http://localhost:8080/ode/processes/DemoBP</tns:address>
+        <tns:address>http://172.16.113.1:8080/ode/processes/DemoBP</tns:address>
         <tns:namespace>kr.co.smartylab</tns:namespace>
         <tns:return_name>String</tns:return_name>
       </tns:Method>
       <tns:Method>
         <tns:name>invoke_second_service</tns:name>
-        <tns:address>http://localhost:8080/ode/processes/DemoBP</tns:address>
+        <tns:address>http://172.16.113.1:8080/ode/processes/DemoBP</tns:address>
         <tns:namespace>kr.co.smartylab</tns:namespace>
         <tns:return_name>String</tns:return_name>
       </tns:Method>
@@ -178,49 +178,7 @@
         </bpel:pick>
         
         
-        <bpel:pick name="CallSecondService">
-            <bpel:onMessage partnerLink="client" operation="invoke_second_service" portType="tns:DemoBP" variable="clientRequest1">
-                <bpel:sequence>
-                    <bpel:assign validate="no" name="AssignSecondServiceInput">
-                        <bpel:copy>
-                            <bpel:from><bpel:literal><tns:call_resource xmlns:tns="http://smartylab.co.kr/products/op/adapter" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <tns:topic_name>tns:topic_name</tns:topic_name>
-  <tns:message>
-    <tns:linear>
-      <tns:x>0.0</tns:x>
-      <tns:y>0.0</tns:y>
-      <tns:z>0.0</tns:z>
-    </tns:linear>
-    <tns:angular>
-      <tns:x>0.0</tns:x>
-      <tns:y>0.0</tns:y>
-      <tns:z>0.0</tns:z>
-    </tns:angular>
-  </tns:message>
-</tns:call_resource>
-</bpel:literal></bpel:from>
-                            <bpel:to variable="DynamicAdapterRequest1" part="parameters"></bpel:to>
-                        </bpel:copy>
-                        
-                    </bpel:assign>
-                    <bpel:invoke name="CallSecondService" partnerLink="DynamicAdapter" operation="call_resource" portType="ns:concert_adapter_soap_serverPortType" inputVariable="DynamicAdapterRequest1" outputVariable="DynamicAdapterResponse1"></bpel:invoke>
-                    <bpel:assign validate="no" name="AssignServiceResult">
-                        
-                        
-                        <bpel:copy>
-                            <bpel:from><bpel:literal><tns:invoke_second_serviceResponse xmlns:tns="kr.co.smartylab" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <tns:out>tns:out</tns:out>
-</tns:invoke_second_serviceResponse>
-</bpel:literal></bpel:from>
-                            <bpel:to variable="clientRequest1" part="parameters"></bpel:to>
-                        </bpel:copy>
-                        
-                    </bpel:assign>
-                    <bpel:reply name="ReplySecondServiceExecutionResult" partnerLink="client" operation="invoke_second_service" portType="tns:DemoBP" variable="clientRequest1"></bpel:reply>
-                </bpel:sequence>
-            </bpel:onMessage>
-                    
-        </bpel:pick>
+        
         
         
         

@@ -269,7 +269,7 @@
 	<wsdl:service name="concert_adapter_soap_serverService">
 		<wsdl:documentation/>
 		<wsdl:port binding="tns:concert_adapter_soap_serverBinding" name="concert_adapter_soap_server">
-			<soap:address location="localhost:8008"/>
+			<soap:address location="http://172.16.113.199:8008"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>
