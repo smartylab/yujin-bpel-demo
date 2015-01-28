@@ -29,21 +29,21 @@
                     </sequence>
                 </complexType>
             </element>
-            <element name="invoke_turtlebot_first">
+            <element name="invoke_first_service">
             	<complexType>
             		<sequence>
             			<element name="in" type="string"></element>
             		</sequence>
             	</complexType>
             </element>
-            <element name="invoke_turtlebot_firstResponse">
+            <element name="invoke_second_service">
             	<complexType>
             		<sequence>
-            			<element name="out" type="string"></element>
+            			<element name="in" type="string"></element>
             		</sequence>
             	</complexType>
             </element>
-            <element name="invoke_first_service">
+            <element name="release_resources">
             	<complexType>
             		<sequence>
             			<element name="in" type="string"></element>
@@ -57,24 +57,10 @@
             		</sequence>
             	</complexType>
             </element>
-            <element name="invoke_second_service">
-            	<complexType>
-            		<sequence>
-            			<element name="in" type="string"></element>
-            		</sequence>
-            	</complexType>
-            </element>
             <element name="invoke_second_serviceResponse">
             	<complexType>
             		<sequence>
             			<element name="out" type="string"></element>
-            		</sequence>
-            	</complexType>
-            </element>
-            <element name="release_resources">
-            	<complexType>
-            		<sequence>
-            			<element name="in" type="string"></element>
             		</sequence>
             	</complexType>
             </element>
@@ -106,26 +92,20 @@
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
 
     <!-- portType implemented by the DemoBP BPEL process -->
-    <message name="invoke_turtlebot_firstRequest">
-    	<part name="parameters" element="tns:invoke_turtlebot_first"></part>
-    </message>
-    <message name="invoke_turtlebot_firstResponse">
-    	<part name="parameters" element="tns:invoke_turtlebot_firstResponse"></part>
-    </message>
     <message name="invoke_first_serviceRequest">
     	<part name="parameters" element="tns:invoke_first_service"></part>
-    </message>
-    <message name="invoke_first_serviceResponse">
-    	<part name="parameters" element="tns:invoke_first_serviceResponse"></part>
     </message>
     <message name="invoke_second_serviceRequest">
     	<part name="parameters" element="tns:invoke_second_service"></part>
     </message>
-    <message name="invoke_second_serviceResponse">
-    	<part name="parameters" element="tns:invoke_second_serviceResponse"></part>
-    </message>
     <message name="release_resourcesRequest">
     	<part name="parameters" element="tns:release_resources"></part>
+    </message>
+    <message name="invoke_first_serviceResponse">
+    	<part name="parameters" element="tns:invoke_first_serviceResponse"></part>
+    </message>
+    <message name="invoke_second_serviceResponse">
+    	<part name="parameters" element="tns:invoke_second_serviceResponse"></part>
     </message>
     <message name="release_resourcesResponse">
     	<part name="parameters" element="tns:release_resourcesResponse"></part>
@@ -137,12 +117,15 @@
         </operation>
         <operation name="invoke_first_service">
         	<input message="tns:invoke_first_serviceRequest"></input>
+        	<output message="tns:invoke_first_serviceResponse"></output>
         </operation>
         <operation name="invoke_second_service">
         	<input message="tns:invoke_second_serviceRequest"></input>
+        	<output message="tns:invoke_second_serviceResponse"></output>
         </operation>
         <operation name="release_resources">
         	<input message="tns:release_resourcesRequest"></input>
+        	<output message="tns:release_resourcesResponse"></output>
         </operation>
     </portType>   
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -173,7 +156,7 @@
     		<input>
     			<soap:body use="literal"/>
     		</input>
-    		<output>
+			<output>
     			<soap:body use="literal"/>
     		</output>
     	</operation>
@@ -182,7 +165,7 @@
     		<input>
     			<soap:body use="literal"/>
     		</input>
-    		<output>
+			<output>
     			<soap:body use="literal"/>
     		</output>
     	</operation>
@@ -191,7 +174,7 @@
     		<input>
     			<soap:body use="literal"/>
     		</input>
-    		<output>
+			<output>
     			<soap:body use="literal"/>
     		</output>
     	</operation>    	
