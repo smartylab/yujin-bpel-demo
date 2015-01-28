@@ -18,7 +18,7 @@
   </extensions>
   <extensions>
     <extendedObject href="DemoBP.bpel#/"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ProcessExtension" modificationStamp="1422412051000"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ProcessExtension" modificationStamp="1422430176000"/>
   </extensions>
   <extensions>
     <extendedObject href="DemoBP.bpel#//@activity/@activities.2"/>
@@ -61,7 +61,7 @@
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="DemoBP.bpel#//@activity/@activities.3/@copy.0"/>
+    <extendedObject href="DemoBP.bpel#//@activity/@activities.3/@copy.1"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
   </extensions>
   <extensions>
@@ -111,5 +111,9 @@
   <extensions>
     <extendedObject href="DemoBP.bpel#//@activity/@activities.5/@messages.0/@activity/@activities.3"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="DemoBP.bpel#//@activity/@activities.3/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
   </extensions>
 </extensionmodel:ExtensionMap>

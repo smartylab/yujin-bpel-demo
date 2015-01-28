@@ -108,13 +108,7 @@
         <tns:name>invoke_first_service</tns:name>
         <tns:address>http://172.16.113.1:8080/ode/processes/DemoBP</tns:address>
         <tns:namespace>kr.co.smartylab</tns:namespace>
-        <tns:return_name>String</tns:return_name>
-      </tns:Method>
-      <tns:Method>
-        <tns:name>invoke_second_service</tns:name>
-        <tns:address>http://172.16.113.1:8080/ode/processes/DemoBP</tns:address>
-        <tns:namespace>kr.co.smartylab</tns:namespace>
-        <tns:return_name>String</tns:return_name>
+        <tns:return_name>[invokeFirstAppResponse,out]</tns:return_name>
       </tns:Method>
     </tns:methods>
   </tns:LinkGraph>
@@ -126,10 +120,19 @@
         <bpel:invoke name="RequestToAllocateResources" partnerLink="DynamicAdapter" operation="invoke_adapter" portType="ns:concert_adapter_soap_serverPortType" inputVariable="DynamicAdapterRequest" outputVariable="DynamicAdapterResponse"></bpel:invoke>
         <bpel:assign validate="no" name="AssignAllocationResult">
             <bpel:copy>
+                <bpel:from><bpel:literal><tns:DemoBPResponse xmlns:tns="kr.co.smartylab" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:result>tns:result</tns:result>
+</tns:DemoBPResponse>
+</bpel:literal></bpel:from>
+                <bpel:to variable="output" part="payload"></bpel:to>
+            </bpel:copy>
+            <bpel:copy>
                 <bpel:from part="parameters" variable="DynamicAdapterResponse">
                     <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns:out]]></bpel:query>
                 </bpel:from>
-                <bpel:to variable="AllocationResult"></bpel:to>
+                <bpel:to part="payload" variable="output">
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                </bpel:to>
             </bpel:copy>
         </bpel:assign>
         <bpel:reply name="replyAllocationResult" partnerLink="client" portType="tns:DemoBP" operation="process" variable="output" />
