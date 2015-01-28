@@ -42,14 +42,16 @@
                   messageType="tns:DemoBPResponseMessage"/>
         
         
-        <bpel:variable name="DynamicAdapterResponse" messageType="ns:invoke_adapterOutput"></bpel:variable>
-        <bpel:variable name="DynamicAdapterRequest" messageType="ns:invoke_adapterInput"></bpel:variable>
-        <bpel:variable name="clientRequest" messageType="tns:invoke_first_serviceRequest"></bpel:variable>
-        <bpel:variable name="DynamicAdapterResponse1" messageType="ns:call_resourceOutput"></bpel:variable>
-        <bpel:variable name="DynamicAdapterRequest1" messageType="ns:call_resourceInput"></bpel:variable>
+        <bpel:variable name="ResourceAllocationResponse" messageType="ns:invoke_adapterOutput"></bpel:variable>
+        <bpel:variable name="ResourceAllocationRequest" messageType="ns:invoke_adapterInput"></bpel:variable>
+        <bpel:variable name="invokeFirstAppRequest" messageType="tns:invoke_first_serviceRequest"></bpel:variable>
+        <bpel:variable name="FirstAppResponse" messageType="ns:call_resourceOutput"></bpel:variable>
+        <bpel:variable name="FirstAppRequest" messageType="ns:call_resourceInput"></bpel:variable>
         <bpel:variable name="AllocationResult" type="ns1:string"></bpel:variable>
-        <bpel:variable name="clientRequest1" messageType="tns:invoke_second_serviceRequest"></bpel:variable>
-        <bpel:variable name="clientResponse" messageType="tns:invoke_first_serviceResponse"></bpel:variable>
+        
+        <bpel:variable name="invokeFirstAppResponse" messageType="tns:invoke_first_serviceResponse"></bpel:variable>
+        <bpel:variable name="invokeSecondAppRequest" messageType="tns:invoke_second_serviceRequest"></bpel:variable>
+        <bpel:variable name="invokeSecondAppResponse" messageType="tns:invoke_second_serviceResponse"></bpel:variable>
     </bpel:variables>
 
     <!-- ================================================================= -->         
@@ -113,11 +115,11 @@
     </tns:methods>
   </tns:LinkGraph>
 </tns:invoke_adapter></bpel:literal></bpel:from>
-                <bpel:to variable="DynamicAdapterRequest" part="parameters"></bpel:to>
+                <bpel:to variable="ResourceAllocationRequest" part="parameters"></bpel:to>
             </bpel:copy>
             
         </bpel:assign>
-        <bpel:invoke name="RequestToAllocateResources" partnerLink="DynamicAdapter" operation="invoke_adapter" portType="ns:concert_adapter_soap_serverPortType" inputVariable="DynamicAdapterRequest" outputVariable="DynamicAdapterResponse"></bpel:invoke>
+        <bpel:invoke name="RequestToAllocateResources" partnerLink="DynamicAdapter" operation="invoke_adapter" portType="ns:concert_adapter_soap_serverPortType" inputVariable="ResourceAllocationRequest" outputVariable="ResourceAllocationResponse"></bpel:invoke>
         <bpel:assign validate="no" name="AssignAllocationResult">
             <bpel:copy>
                 <bpel:from><bpel:literal><tns:DemoBPResponse xmlns:tns="kr.co.smartylab" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -127,7 +129,7 @@
                 <bpel:to variable="output" part="payload"></bpel:to>
             </bpel:copy>
             <bpel:copy>
-                <bpel:from part="parameters" variable="DynamicAdapterResponse">
+                <bpel:from part="parameters" variable="ResourceAllocationResponse">
                     <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns:out]]></bpel:query>
                 </bpel:from>
                 <bpel:to part="payload" variable="output">
@@ -137,7 +139,7 @@
         </bpel:assign>
         <bpel:reply name="replyAllocationResult" partnerLink="client" portType="tns:DemoBP" operation="process" variable="output" />
         <bpel:pick name="CallTurtlebotService">
-            <bpel:onMessage partnerLink="client" operation="invoke_first_service" portType="tns:DemoBP" variable="clientRequest">
+            <bpel:onMessage partnerLink="client" operation="invoke_first_service" portType="tns:DemoBP" variable="invokeFirstAppRequest">
                 <bpel:sequence>
                     <bpel:assign validate="no" name="AssignTurtlebotServiceInput">
                         <bpel:copy>
@@ -157,24 +159,24 @@
   </tns:message>
 </tns:call_resource>
 </bpel:literal></bpel:from>
-                            <bpel:to variable="DynamicAdapterRequest1" part="parameters"></bpel:to>
+                            <bpel:to variable="FirstAppRequest" part="parameters"></bpel:to>
                         </bpel:copy>
                         
                     </bpel:assign>
-                    <bpel:invoke name="callTurtlebotMove" partnerLink="DynamicAdapter" operation="call_resource" portType="ns:concert_adapter_soap_serverPortType" inputVariable="DynamicAdapterRequest1" outputVariable="DynamicAdapterResponse1"></bpel:invoke>
+                    <bpel:invoke name="callTurtlebotMove" partnerLink="DynamicAdapter" operation="call_resource" portType="ns:concert_adapter_soap_serverPortType" inputVariable="FirstAppRequest" outputVariable="FirstAppResponse"></bpel:invoke>
                     <bpel:assign validate="no" name="AssignTurtlebotMoveResult">
                         <bpel:copy>
                             <bpel:from><bpel:literal><tns:invoke_first_serviceResponse xmlns:tns="kr.co.smartylab" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <tns:out>tns:out</tns:out>
 </tns:invoke_first_serviceResponse>
 </bpel:literal></bpel:from>
-                            <bpel:to variable="clientResponse" part="parameters"></bpel:to>
+                            <bpel:to variable="invokeFirstAppResponse" part="parameters"></bpel:to>
                         </bpel:copy>
                         
                     </bpel:assign>
                     
                     
-                    <bpel:reply name="ReplyFirstServiceExecutionResult" partnerLink="client" operation="invoke_first_service" portType="tns:DemoBP" variable="clientResponse"></bpel:reply>
+                    <bpel:reply name="ReplyFirstServiceExecutionResult" partnerLink="client" operation="invoke_first_service" portType="tns:DemoBP" variable="invokeFirstAppResponse"></bpel:reply>
                 </bpel:sequence>
             </bpel:onMessage>
             
@@ -186,6 +188,46 @@
         
         
         
+        <bpel:pick name="CallOtherService">
+            <bpel:onMessage partnerLink="client" operation="invoke_second_service" portType="tns:DemoBP" variable="invokeSecondAppRequest">
+                <bpel:sequence>
+                    <bpel:assign validate="no" name="AssignServiceInput">
+                        <bpel:copy>
+                            <bpel:from><bpel:literal><tns:call_resource xmlns:tns="http://smartylab.co.kr/products/op/adapter" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:topic_name>tns:topic_name</tns:topic_name>
+  <tns:message>
+    <tns:linear>
+      <tns:x>0.0</tns:x>
+      <tns:y>0.0</tns:y>
+      <tns:z>0.0</tns:z>
+    </tns:linear>
+    <tns:angular>
+      <tns:x>0.0</tns:x>
+      <tns:y>0.0</tns:y>
+      <tns:z>0.0</tns:z>
+    </tns:angular>
+  </tns:message>
+</tns:call_resource>
+</bpel:literal></bpel:from>
+                            <bpel:to variable="FirstAppRequest" part="parameters"></bpel:to>
+                        </bpel:copy>
+                        
+                    </bpel:assign>
+                    <bpel:invoke name="InvokeChangableService" partnerLink="DynamicAdapter" operation="call_resource" portType="ns:concert_adapter_soap_serverPortType" inputVariable="FirstAppRequest" outputVariable="FirstAppResponse"></bpel:invoke>
+                    <bpel:assign validate="no" name="AssignServiceExecutionResult">
+                        <bpel:copy>
+                            <bpel:from><bpel:literal><tns:invoke_second_serviceResponse xmlns:tns="kr.co.smartylab" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:out>tns:out</tns:out>
+</tns:invoke_second_serviceResponse>
+</bpel:literal></bpel:from>
+                            <bpel:to variable="invokeSecondAppResponse" part="parameters"></bpel:to>
+                        </bpel:copy>
+                        
+                    </bpel:assign>
+                    <bpel:reply name="ReplyServiceExecutionResult" partnerLink="client" operation="invoke_second_service" portType="tns:DemoBP" variable="invokeSecondAppResponse"></bpel:reply>
+                </bpel:sequence>
+            </bpel:onMessage>
+        </bpel:pick>
     </bpel:sequence>
 </bpel:process>
 
