@@ -98,8 +98,10 @@
                         </bpel:copy>
                         
                     </bpel:assign>
-                    <bpel:invoke name="callTurtlebotMove" partnerLink="DynamicAdapter" operation="call_resource" portType="ns:concert_adapter_soap_serverPortType" inputVariable="FirstAppRequest" outputVariable="FirstAppResponse"></bpel:invoke>
+                    
                     <bpel:assign validate="no" name="AssignTurtlebotMoveResult">
+                        
+                        
                         <bpel:copy>
                             <bpel:from><bpel:literal><tns:invoke_first_serviceResponse xmlns:tns="kr.co.smartylab" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <tns:out>tns:out</tns:out>
@@ -107,7 +109,16 @@
 </bpel:literal></bpel:from>
                             <bpel:to variable="invokeFirstAppResponse" part="parameters"></bpel:to>
                         </bpel:copy>
-                        
+                        <bpel:copy>
+                            <bpel:from part="parameters" variable="invokeFirstAppRequest">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:in]]></bpel:query>
+                            </bpel:from>
+                            <bpel:to part="parameters" variable="invokeFirstAppResponse">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                    <![CDATA[tns:out]]>
+                                </bpel:query>
+                            </bpel:to>
+                        </bpel:copy>
                     </bpel:assign>
                     
                     
@@ -155,8 +166,8 @@
         <tns:name>invoke_first_service</tns:name>
         <tns:address>http://172.16.113.1:8080/ode/processes/DemoBP</tns:address>
         <tns:namespace>kr.co.smartylab</tns:namespace>
-        <tns:return_name>invokeFirstAppResponse/out</tns:return_name>
-        <tns:param>input</tns:param>
+        <tns:return_name>invoke_first_serviceResponse/out</tns:return_name>
+        <tns:param>in</tns:param>
       </tns:Method>
     </tns:methods>
   </tns:LinkGraph>

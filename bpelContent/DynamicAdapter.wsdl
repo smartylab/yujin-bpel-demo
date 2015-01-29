@@ -228,42 +228,48 @@
 			<wsdl:output message="tns:call_resourceOutput"/>
 		</wsdl:operation>
 	</wsdl:portType>
-	<wsdl:binding name="concert_adapter_soap_serverBinding" type="tns:concert_adapter_soap_serverPortType">
-		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+	<wsdl:binding name="concert_adapter_soap_serverBinding"
+		type="tns:concert_adapter_soap_serverPortType">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
 		<wsdl:operation name="release_allocated_resources">
-			<soap:operation soapAction="localhostrelease_allocated_resources" style="document"/>
+			<soap:operation
+				soapAction="http://smartylab.co.kr/products/op/adapter/release_allocated_resources" />
 			<wsdl:input>
-				<soap:body use="literal"/>
+				<soap:body use="literal" />
 			</wsdl:input>
 			<wsdl:output>
-				<soap:body use="literal"/>
+				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="invoke_adapter">
-			<soap:operation soapAction="localhostinvoke_adapter" style="document"/>
+			<soap:operation
+				soapAction="http://smartylab.co.kr/products/op/adapter/invoke_adapter" />
 			<wsdl:input>
-				<soap:body use="literal"/>
+				<soap:body use="literal" />
 			</wsdl:input>
 			<wsdl:output>
-				<soap:body use="literal"/>
+				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="invoke_adapter_single_node">
-			<soap:operation soapAction="localhostinvoke_adapter_single_node" style="document"/>
+			<soap:operation
+				soapAction="http://smartylab.co.kr/products/op/adapter/invoke_adapter_single_node" />
 			<wsdl:input>
-				<soap:body use="literal"/>
+				<soap:body use="literal" />
 			</wsdl:input>
 			<wsdl:output>
-				<soap:body use="literal"/>
+				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="call_resource">
-			<soap:operation soapAction="localhostcall_resource" style="document"/>
+			<soap:operation
+				soapAction="http://smartylab.co.kr/products/op/adapter/call_resource" />
 			<wsdl:input>
-				<soap:body use="literal"/>
+				<soap:body use="literal" />
 			</wsdl:input>
 			<wsdl:output>
-				<soap:body use="literal"/>
+				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
 	</wsdl:binding>

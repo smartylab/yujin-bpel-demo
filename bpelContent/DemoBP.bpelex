@@ -17,7 +17,7 @@
   </extensions>
   <extensions>
     <extendedObject href="DemoBP.bpel#/"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ProcessExtension" modificationStamp="1422438264000"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ProcessExtension" modificationStamp="1422510591000"/>
   </extensions>
   <extensions>
     <extendedObject href="DemoBP.bpel#//@activity/@activities.0/@messages.1/@activity/@activities.1"/>
@@ -88,15 +88,7 @@
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="DemoBP.bpel#//@activity/@activities.0/@messages.0/@activity/@activities.2"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
-  </extensions>
-  <extensions>
     <extendedObject href="DemoBP.bpel#//@activity/@activities.0/@messages.0/@activity/@activities.0/@copy.0"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
-  </extensions>
-  <extensions>
-    <extendedObject href="DemoBP.bpel#//@activity/@activities.0/@messages.0/@activity/@activities.2/@copy.0"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
   </extensions>
   <extensions>
@@ -104,7 +96,7 @@
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="DemoBP.bpel#//@activity/@activities.0/@messages.0/@activity/@activities.3"/>
+    <extendedObject href="DemoBP.bpel#//@activity/@activities.0/@messages.0/@activity/@activities.2"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
@@ -162,5 +154,13 @@
   <extensions>
     <extendedObject href="DemoBP.bpel#//@activity/@activities.0/@messages.1/@activity"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="DemoBP.bpel#//@activity/@activities.0/@messages.0/@activity/@activities.1/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="DemoBP.bpel#//@activity/@activities.0/@messages.0/@activity/@activities.1/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
   </extensions>
 </extensionmodel:ExtensionMap>
