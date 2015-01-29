@@ -85,10 +85,11 @@
 			</xsd:complexType>
 			<xsd:complexType name="ArrayOfinvoke_adapterLinkGraphmethodsMethod">
 				<xsd:all>
-					<xsd:element name="name" type="xsd:string"/>
-					<xsd:element name="address" type="xsd:string"/>
-					<xsd:element name="namespace" type="xsd:string"/>
-					<xsd:element name="return_name" type="xsd:string"/>
+					<xsd:element name="name" type="xsd:string" />
+					<xsd:element name="address" type="xsd:string" />
+					<xsd:element name="namespace" type="xsd:string" />
+					<xsd:element name="return_name" type="xsd:string" />
+					<xsd:element name="param" type="xsd:string"></xsd:element>
 				</xsd:all>
 			</xsd:complexType>
 			<xsd:element name="invoke_adapterResponse">

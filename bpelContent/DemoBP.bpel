@@ -64,81 +64,16 @@
         <!-- Receive input from requester. 
              Note: This maps to operation defined in DemoBP.wsdl 
              -->
-        <bpel:receive name="receiveInput" partnerLink="client"
-                 portType="tns:DemoBP"
-                 operation="process" variable="input"
-                 createInstance="yes"/>
+        
         
         <!-- Generate reply to synchronous request -->
         
         
-        <bpel:assign validate="no" name="AssignLinkGraph">
-            <bpel:copy>
-                <bpel:from><bpel:literal xml:space="preserve"><tns:invoke_adapter xmlns:tns="http://smartylab.co.kr/products/op/adapter" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <tns:LinkGraph>
-    <tns:name>tns:name</tns:name>
-    <tns:nodes>
-      <tns:Node>
-        <tns:id>tns:id</tns:id>
-        <tns:uri>tns:uri</tns:uri>
-        <tns:max>0</tns:max>
-        <tns:min>0</tns:min>
-        <tns:parameters>
-          <tns:parameter>
-            <tns:message>tns:message</tns:message>
-            <tns:frequency>0</tns:frequency>
-          </tns:parameter>
-        </tns:parameters>
-      </tns:Node>
-    </tns:nodes>
-    <tns:topics>
-      <tns:Topic>
-        <tns:id>tns:id</tns:id>
-        <tns:type>tns:type</tns:type>
-      </tns:Topic>
-    </tns:topics>
-    <tns:edges>
-      <tns:Edge>
-        <tns:start>tns:start</tns:start>
-        <tns:finish>tns:finish</tns:finish>
-        <tns:remap_from>tns:remap_from</tns:remap_from>
-        <tns:remap_to>tns:remap_to</tns:remap_to>
-      </tns:Edge>
-    </tns:edges>
-    <tns:methods>
-      <tns:Method>
-        <tns:name>invoke_first_service</tns:name>
-        <tns:address>http://172.16.113.1:8080/ode/processes/DemoBP</tns:address>
-        <tns:namespace>kr.co.smartylab</tns:namespace>
-        <tns:return_name>[invokeFirstAppResponse,out]</tns:return_name>
-      </tns:Method>
-    </tns:methods>
-  </tns:LinkGraph>
-</tns:invoke_adapter></bpel:literal></bpel:from>
-                <bpel:to variable="ResourceAllocationRequest" part="parameters"></bpel:to>
-            </bpel:copy>
-            
-        </bpel:assign>
-        <bpel:invoke name="RequestToAllocateResources" partnerLink="DynamicAdapter" operation="invoke_adapter" portType="ns:concert_adapter_soap_serverPortType" inputVariable="ResourceAllocationRequest" outputVariable="ResourceAllocationResponse"></bpel:invoke>
-        <bpel:assign validate="no" name="AssignAllocationResult">
-            <bpel:copy>
-                <bpel:from><bpel:literal><tns:DemoBPResponse xmlns:tns="kr.co.smartylab" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <tns:result>tns:result</tns:result>
-</tns:DemoBPResponse>
-</bpel:literal></bpel:from>
-                <bpel:to variable="output" part="payload"></bpel:to>
-            </bpel:copy>
-            <bpel:copy>
-                <bpel:from part="parameters" variable="ResourceAllocationResponse">
-                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns:out]]></bpel:query>
-                </bpel:from>
-                <bpel:to part="payload" variable="output">
-                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
-                </bpel:to>
-            </bpel:copy>
-        </bpel:assign>
-        <bpel:reply name="replyAllocationResult" partnerLink="client" portType="tns:DemoBP" operation="process" variable="output" />
-        <bpel:pick name="CallTurtlebotService">
+        
+        
+        
+        
+        <bpel:pick name="CallTurtlebotService" createInstance="yes">
             <bpel:onMessage partnerLink="client" operation="invoke_first_service" portType="tns:DemoBP" variable="invokeFirstAppRequest">
                 <bpel:sequence>
                     <bpel:assign validate="no" name="AssignTurtlebotServiceInput">
@@ -180,6 +115,77 @@
                 </bpel:sequence>
             </bpel:onMessage>
             
+            <bpel:onMessage partnerLink="client" operation="process" variable="input">
+                <bpel:sequence name="Sequence">
+                    <bpel:assign validate="no" name="AssignLinkGraph">
+            <bpel:copy>
+                <bpel:from><bpel:literal xml:space="preserve"><tns:invoke_adapter xmlns:tns="http://smartylab.co.kr/products/op/adapter" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:LinkGraph>
+    <tns:name>tns:name</tns:name>
+    <tns:nodes>
+      <tns:Node>
+        <tns:id>tns:id</tns:id>
+        <tns:uri>tns:uri</tns:uri>
+        <tns:max>0</tns:max>
+        <tns:min>0</tns:min>
+        <tns:parameters>
+          <tns:parameter>
+            <tns:message>tns:message</tns:message>
+            <tns:frequency>0</tns:frequency>
+          </tns:parameter>
+        </tns:parameters>
+      </tns:Node>
+    </tns:nodes>
+    <tns:topics>
+      <tns:Topic>
+        <tns:id>tns:id</tns:id>
+        <tns:type>tns:type</tns:type>
+      </tns:Topic>
+    </tns:topics>
+    <tns:edges>
+      <tns:Edge>
+        <tns:start>tns:start</tns:start>
+        <tns:finish>tns:finish</tns:finish>
+        <tns:remap_from>tns:remap_from</tns:remap_from>
+        <tns:remap_to>tns:remap_to</tns:remap_to>
+      </tns:Edge>
+    </tns:edges>
+    <tns:methods>
+      <tns:Method>
+        <tns:name>invoke_first_service</tns:name>
+        <tns:address>http://172.16.113.1:8080/ode/processes/DemoBP</tns:address>
+        <tns:namespace>kr.co.smartylab</tns:namespace>
+        <tns:return_name>invokeFirstAppResponse/out</tns:return_name>
+        <tns:param>input</tns:param>
+      </tns:Method>
+    </tns:methods>
+  </tns:LinkGraph>
+</tns:invoke_adapter></bpel:literal></bpel:from>
+                <bpel:to variable="ResourceAllocationRequest" part="parameters"></bpel:to>
+            </bpel:copy>
+            
+        </bpel:assign>
+                    <bpel:invoke name="RequestToAllocateResources" partnerLink="DynamicAdapter" operation="invoke_adapter" portType="ns:concert_adapter_soap_serverPortType" inputVariable="ResourceAllocationRequest" outputVariable="ResourceAllocationResponse"></bpel:invoke>
+                    <bpel:assign validate="no" name="AssignAllocationResult"><bpel:copy>
+                <bpel:from><bpel:literal><tns:DemoBPResponse xmlns:tns="kr.co.smartylab" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:result>tns:result</tns:result>
+</tns:DemoBPResponse>
+</bpel:literal></bpel:from>
+                <bpel:to variable="output" part="payload"></bpel:to>
+            </bpel:copy>
+            <bpel:copy>
+                <bpel:from part="parameters" variable="ResourceAllocationResponse">
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns:out]]></bpel:query>
+                </bpel:from>
+                <bpel:to part="payload" variable="output">
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                </bpel:to>
+            </bpel:copy>
+        
+                    </bpel:assign>
+                    <bpel:reply name="replyAllocationResult" partnerLink="client" portType="tns:DemoBP" operation="process" variable="output" />
+                </bpel:sequence>
+            </bpel:onMessage>
         </bpel:pick>
         
         
