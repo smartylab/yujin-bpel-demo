@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <wsdl:definitions name="concert_adapter_soap_server" targetNamespace="http://smartylab.co.kr/products/op/adapter" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://smartylab.co.kr/products/op/adapter" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	
+    
 	<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"/>
+	
+
+    
 	<wsdl:types>
+		
+       
 		<xsd:schema elementFormDefault="qualified" targetNamespace="http://smartylab.co.kr/products/op/adapter" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			
+       
 			<xsd:element name="release_allocated_resources">
 				<xsd:complexType/>
 			</xsd:element>
@@ -22,10 +31,10 @@
 			</xsd:element>
 			<xsd:complexType name="invoke_adapterLinkGraph">
 				<xsd:all>
-					<xsd:element name="name" type="xsd:string"/>
 					<xsd:element name="nodes" type="tns:ArrayOfinvoke_adapterLinkGraphnodes"/>
-					<xsd:element name="topics" type="tns:ArrayOfinvoke_adapterLinkGraphtopics"/>
 					<xsd:element name="edges" type="tns:ArrayOfinvoke_adapterLinkGraphedges"/>
+					<xsd:element name="name" type="xsd:string"/>
+					<xsd:element name="topics" type="tns:ArrayOfinvoke_adapterLinkGraphtopics"/>
 					<xsd:element name="methods" type="tns:ArrayOfinvoke_adapterLinkGraphmethods"/>
 				</xsd:all>
 			</xsd:complexType>
@@ -36,11 +45,11 @@
 			</xsd:complexType>
 			<xsd:complexType name="ArrayOfinvoke_adapterLinkGraphnodesNode">
 				<xsd:all>
-					<xsd:element name="id" type="xsd:string"/>
-					<xsd:element name="uri" type="xsd:string"/>
 					<xsd:element name="max" type="xsd:int"/>
 					<xsd:element name="min" type="xsd:int"/>
+					<xsd:element name="id" type="xsd:string"/>
 					<xsd:element name="parameters" type="tns:ArrayOfArrayOfinvoke_adapterLinkGraphnodesNodeparameters"/>
+					<xsd:element name="uri" type="xsd:string"/>
 				</xsd:all>
 			</xsd:complexType>
 			<xsd:complexType name="ArrayOfArrayOfinvoke_adapterLinkGraphnodesNodeparameters">
@@ -74,8 +83,8 @@
 			</xsd:complexType>
 			<xsd:complexType name="ArrayOfinvoke_adapterLinkGraphtopicsTopic">
 				<xsd:all>
-					<xsd:element name="id" type="xsd:string"/>
 					<xsd:element name="type" type="xsd:string"/>
+					<xsd:element name="id" type="xsd:string"/>
 				</xsd:all>
 			</xsd:complexType>
 			<xsd:complexType name="ArrayOfinvoke_adapterLinkGraphmethods">
@@ -85,11 +94,11 @@
 			</xsd:complexType>
 			<xsd:complexType name="ArrayOfinvoke_adapterLinkGraphmethodsMethod">
 				<xsd:all>
-					<xsd:element name="name" type="xsd:string" />
-					<xsd:element name="address" type="xsd:string" />
-					<xsd:element name="namespace" type="xsd:string" />
-					<xsd:element name="return_name" type="xsd:string" />
-					<xsd:element name="param" type="xsd:string"></xsd:element>
+					<xsd:element name="return_name" type="xsd:string"/>
+					<xsd:element name="namespace" type="xsd:string"/>
+					<xsd:element name="name" type="xsd:string"/>
+					<xsd:element name="param" type="xsd:string"/>
+					<xsd:element name="address" type="xsd:string"/>
 				</xsd:all>
 			</xsd:complexType>
 			<xsd:element name="invoke_adapterResponse">
@@ -108,11 +117,11 @@
 			</xsd:element>
 			<xsd:complexType name="invoke_adapter_single_nodeNode">
 				<xsd:all>
-					<xsd:element name="id" type="xsd:string"/>
-					<xsd:element name="uri" type="xsd:string"/>
 					<xsd:element name="max" type="xsd:int"/>
 					<xsd:element name="min" type="xsd:int"/>
+					<xsd:element name="id" type="xsd:string"/>
 					<xsd:element name="parameters" type="tns:ArrayOfinvoke_adapter_single_nodeNodeparameters"/>
+					<xsd:element name="uri" type="xsd:string"/>
 				</xsd:all>
 			</xsd:complexType>
 			<xsd:complexType name="ArrayOfinvoke_adapter_single_nodeNodeparameters">
@@ -136,8 +145,8 @@
 			<xsd:element name="call_resource">
 				<xsd:complexType>
 					<xsd:all>
-						<xsd:element name="topic_name" type="xsd:string"/>
 						<xsd:element name="message" type="tns:call_resourcemessage"/>
+						<xsd:element name="topic_name" type="xsd:string"/>
 					</xsd:all>
 				</xsd:complexType>
 			</xsd:element>
@@ -149,15 +158,15 @@
 			</xsd:complexType>
 			<xsd:complexType name="call_resourcemessagelinear">
 				<xsd:all>
-					<xsd:element name="x" type="xsd:float"/>
 					<xsd:element name="y" type="xsd:float"/>
+					<xsd:element name="x" type="xsd:float"/>
 					<xsd:element name="z" type="xsd:float"/>
 				</xsd:all>
 			</xsd:complexType>
 			<xsd:complexType name="call_resourcemessageangular">
 				<xsd:all>
-					<xsd:element name="x" type="xsd:float"/>
 					<xsd:element name="y" type="xsd:float"/>
+					<xsd:element name="x" type="xsd:float"/>
 					<xsd:element name="z" type="xsd:float"/>
 				</xsd:all>
 			</xsd:complexType>
@@ -168,9 +177,27 @@
 					</xsd:all>
 				</xsd:complexType>
 			</xsd:element>
+			<xsd:element name="invoke_rapp">
+				<xsd:complexType>
+					<xsd:all>
+						<xsd:element name="svc_name" type="xsd:string"/>
+					</xsd:all>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="invoke_rappResponse">
+				<xsd:complexType>
+					<xsd:all>
+						<xsd:element name="out" type="xsd:string"/>
+					</xsd:all>
+				</xsd:complexType>
+			</xsd:element>
 		</xsd:schema>
+		
+    
 	</wsdl:types>
 	
+
+
 	<wsdl:message name="release_allocated_resourcesInput">
 		<wsdl:part element="tns:release_allocated_resources" name="parameters"/>
 	</wsdl:message>
@@ -194,6 +221,12 @@
 	</wsdl:message>
 	<wsdl:message name="call_resourceOutput">
 		<wsdl:part element="tns:call_resourceResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="invoke_rappInput">
+		<wsdl:part element="tns:invoke_rapp" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="invoke_rappOutput">
+		<wsdl:part element="tns:invoke_rappResponse" name="parameters"/>
 	</wsdl:message>
 	<wsdl:portType name="concert_adapter_soap_serverPortType">
 		<wsdl:operation name="release_allocated_resources">
@@ -227,56 +260,63 @@
 			<wsdl:input message="tns:call_resourceInput"/>
 			<wsdl:output message="tns:call_resourceOutput"/>
 		</wsdl:operation>
+		<wsdl:operation name="invoke_rapp">
+			<wsdl:input message="tns:invoke_rappInput"/>
+			<wsdl:output message="tns:invoke_rappOutput"/>
+		</wsdl:operation>
 	</wsdl:portType>
-	<wsdl:binding name="concert_adapter_soap_serverBinding"
-		type="tns:concert_adapter_soap_serverPortType">
-		<soap:binding style="document"
-			transport="http://schemas.xmlsoap.org/soap/http" />
+	<wsdl:binding name="concert_adapter_soap_serverBinding" type="tns:concert_adapter_soap_serverPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 		<wsdl:operation name="release_allocated_resources">
-			<soap:operation
-				soapAction="http://smartylab.co.kr/products/op/adapter/release_allocated_resources" />
+			<soap:operation soapAction="localhostrelease_allocated_resources" style="document"/>
 			<wsdl:input>
-				<soap:body use="literal" />
+				<soap:body use="literal"/>
 			</wsdl:input>
 			<wsdl:output>
-				<soap:body use="literal" />
+				<soap:body use="literal"/>
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="invoke_adapter">
-			<soap:operation
-				soapAction="http://smartylab.co.kr/products/op/adapter/invoke_adapter" />
+			<soap:operation soapAction="localhostinvoke_adapter" style="document"/>
 			<wsdl:input>
-				<soap:body use="literal" />
+				<soap:body use="literal"/>
 			</wsdl:input>
 			<wsdl:output>
-				<soap:body use="literal" />
+				<soap:body use="literal"/>
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="invoke_adapter_single_node">
-			<soap:operation
-				soapAction="http://smartylab.co.kr/products/op/adapter/invoke_adapter_single_node" />
+			<soap:operation soapAction="localhostinvoke_adapter_single_node" style="document"/>
 			<wsdl:input>
-				<soap:body use="literal" />
+				<soap:body use="literal"/>
 			</wsdl:input>
 			<wsdl:output>
-				<soap:body use="literal" />
+				<soap:body use="literal"/>
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="call_resource">
-			<soap:operation
-				soapAction="http://smartylab.co.kr/products/op/adapter/call_resource" />
+			<soap:operation soapAction="localhostcall_resource" style="document"/>
 			<wsdl:input>
-				<soap:body use="literal" />
+				<soap:body use="literal"/>
 			</wsdl:input>
 			<wsdl:output>
-				<soap:body use="literal" />
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="invoke_rapp">
+			<soap:operation soapAction="localhostinvoke_rapp" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
 			</wsdl:output>
 		</wsdl:operation>
 	</wsdl:binding>
 	<wsdl:service name="concert_adapter_soap_serverService">
 		<wsdl:documentation/>
 		<wsdl:port binding="tns:concert_adapter_soap_serverBinding" name="concert_adapter_soap_server">
-			<soap:address location="http://172.16.113.199:8008"/>
+			<soap:address location="http://localhost:8008"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

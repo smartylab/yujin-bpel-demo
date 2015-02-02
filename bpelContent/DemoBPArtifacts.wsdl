@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="kr.co.smartylab" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:wsdl="http://smartylab.co.kr/products/op/adapter" name="DemoBP" targetNamespace="kr.co.smartylab" xmlns:p="http://www.w3.org/2001/XMLSchema">
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:p="http://www.w3.org/2001/XMLSchema" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="kr.co.smartylab" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:wsdl="http://smartylab.co.kr/products/op/adapter" name="DemoBP" targetNamespace="kr.co.smartylab">
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      TYPE DEFINITION - List of types participating in this BPEL process 
@@ -10,7 +10,7 @@
     <plnk:partnerLinkType name="DynamicAdapterPLT">
     <plnk:role name="DynamicAdapterPLTRole" portType="wsdl:concert_adapter_soap_serverPortType"/>
   </plnk:partnerLinkType>
-    <import location="DynamicAdapter.wsdl" namespace="http://smartylab.co.kr/products/op/adapter"/>
+    <import location="concert_adapter_demo.wsdl" namespace="http://smartylab.co.kr/products/op/adapter"/>
     <types>
         <schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="kr.co.smartylab">
 
@@ -32,42 +32,42 @@
             <element name="invoke_first_service">
             	<complexType>
             		<sequence>
-            			<element name="in" type="string"></element>
+            			<element name="in" type="string"/>
             		</sequence>
             	</complexType>
             </element>
             <element name="invoke_second_service">
             	<complexType>
             		<sequence>
-            			<element name="in" type="string"></element>
+            			<element name="in" type="string"/>
             		</sequence>
             	</complexType>
             </element>
             <element name="release_resources">
             	<complexType>
             		<sequence>
-            			<element name="in" type="string"></element>
+            			<element name="in" type="string"/>
             		</sequence>
             	</complexType>
             </element>
             <element name="invoke_first_serviceResponse">
             	<complexType>
             		<sequence>
-            			<element name="out" type="string"></element>
+            			<element name="out" type="string"/>
             		</sequence>
             	</complexType>
             </element>
             <element name="invoke_second_serviceResponse">
             	<complexType>
             		<sequence>
-            			<element name="out" type="string"></element>
+            			<element name="out" type="string"/>
             		</sequence>
             	</complexType>
             </element>
             <element name="release_resourcesResponse">
             	<complexType>
             		<sequence>
-            			<element name="out" type="string"></element>
+            			<element name="out" type="string"/>
             		</sequence>
             	</complexType>
             </element>
@@ -93,22 +93,22 @@
 
     <!-- portType implemented by the DemoBP BPEL process -->
     <message name="invoke_first_serviceRequest">
-    	<part name="parameters" element="tns:invoke_first_service"></part>
+    	<part element="tns:invoke_first_service" name="parameters"/>
     </message>
     <message name="invoke_second_serviceRequest">
-    	<part name="parameters" element="tns:invoke_second_service"></part>
+    	<part element="tns:invoke_second_service" name="parameters"/>
     </message>
     <message name="release_resourcesRequest">
-    	<part name="parameters" element="tns:release_resources"></part>
+    	<part element="tns:release_resources" name="parameters"/>
     </message>
     <message name="invoke_first_serviceResponse">
-    	<part name="parameters" element="tns:invoke_first_serviceResponse"></part>
+    	<part element="tns:invoke_first_serviceResponse" name="parameters"/>
     </message>
     <message name="invoke_second_serviceResponse">
-    	<part name="parameters" element="tns:invoke_second_serviceResponse"></part>
+    	<part element="tns:invoke_second_serviceResponse" name="parameters"/>
     </message>
     <message name="release_resourcesResponse">
-    	<part name="parameters" element="tns:release_resourcesResponse"></part>
+    	<part element="tns:release_resourcesResponse" name="parameters"/>
     </message>
     <portType name="DemoBP">
         <operation name="process">
@@ -116,16 +116,16 @@
             <output message="tns:DemoBPResponseMessage"/>
         </operation>
         <operation name="invoke_first_service">
-        	<input message="tns:invoke_first_serviceRequest"></input>
-        	<output message="tns:invoke_first_serviceResponse"></output>
+        	<input message="tns:invoke_first_serviceRequest"/>
+        	<output message="tns:invoke_first_serviceResponse"/>
         </operation>
         <operation name="invoke_second_service">
-        	<input message="tns:invoke_second_serviceRequest"></input>
-        	<output message="tns:invoke_second_serviceResponse"></output>
+        	<input message="tns:invoke_second_serviceRequest"/>
+        	<output message="tns:invoke_second_serviceResponse"/>
         </operation>
         <operation name="release_resources">
-        	<input message="tns:release_resourcesRequest"></input>
-        	<output message="tns:release_resourcesResponse"></output>
+        	<input message="tns:release_resourcesRequest"/>
+        	<output message="tns:release_resourcesResponse"/>
         </operation>
     </portType>   
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
